@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All Users</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+      padding: 30px 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4b6cb7;
+      font-weight: 900;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
+
+    thead {
+      background: linear-gradient(90deg, #4b6cb7, #182848);
+      color: white;
+      text-transform: uppercase;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:hover {
+      background: #d6e0ff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    th {
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+
+    /* Zebra striping */
+    tbody tr:nth-child(odd) {
+      background: #f9fbff;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      body {
+        padding: 20px 10px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead tr {
+        display: none;
+      }
+      tbody tr {
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(75,108,183,0.15);
+        background: white;
+        padding: 15px;
+      }
+      tbody td {
+        padding: 10px 0;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
+      tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: 700;
+        text-align: left;
+        color: #4b6cb7;
+      }
+      tbody td:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    .no-users {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 1.2rem;
+      color: #4b6cb7;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>All Users</h1>
+
+    <% if (users && users.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user, index) => { %>
+            <tr>
+              <td data-label="#"> <%= index + 1 %> </td>
+              <td data-label="Name"> <%= user.name %> </td>
+              <td data-label="Email"> <%= user.email %> </td>
+              <td data-label="Age"> <%= user.age %> </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p class="no-users">No users found.</p>
+    <% } %>
+  </div>
+</body>
+</html>
